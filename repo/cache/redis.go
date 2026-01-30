@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-redis/redis/v8"
 
+	"GoMusic/misc/config"
 	"GoMusic/misc/log"
 )
 
@@ -21,11 +22,13 @@ var (
 )
 
 func init() {
+	cfg := config.GetConfig()
 	rdb = redis.NewClient(&redis.Options{
-		Addr:     "127.0.0.1:16379",  // redis 服务端地址
-		Password: "SzW7fh2Fs5d2ypwT", // redis 密码
-		DB:       0,
+		Addr:     cfg.GetRedisAddr(),
+		Password: cfg.Redis.Password,
+		DB:       cfg.Redis.DB,
 	})
+	log.Infof("Redis连接配置: %s", cfg.GetRedisAddr())
 }
 
 func SetKey(key string, value string) error {

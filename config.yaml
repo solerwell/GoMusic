@@ -1,0 +1,33 @@
+# GoMusic 配置文件
+
+# 服务器配置
+server:
+  port: 8081
+
+# 数据库配置
+database:
+  # 数据库类型: mysql 或 sqlite
+  type: sqlite
+  
+  # MySQL配置 (当type=mysql时使用)
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: go_music
+    password: "12345678"
+    dbname: go_music
+    charset: utf8mb4
+    parseTime: true
+    loc: Local
+  
+  # SQLite配置 (当type=sqlite时使用)
+  sqlite:
+    # 数据库文件路径,支持相对路径和绝对路径
+    path: ./data/gomusic.db
+
+# Redis缓存配置
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: "SzW7fh2Fs5d2ypwT"
+  db: 0

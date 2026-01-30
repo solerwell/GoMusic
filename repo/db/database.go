@@ -1,11 +1,17 @@
 package db
 
 import (
+	"fmt"
+	"os"
+	"path/filepath"
+
 	_ "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
+	"GoMusic/misc/config"
 	"GoMusic/misc/log"
 	"GoMusic/misc/models"
 )
@@ -13,20 +19,50 @@ import (
 var db *gorm.DB
 
 func init() {
-	dsn := "go_music:12345678@tcp(127.0.0.1:3306)/go_music?charset=utf8mb4&parseTime=True&loc=Local"
-	//dsn := "root:12345678@tcp(127.0.0.1:3306)/go_music?charset=utf8mb4&parseTime=True&loc=Local"
-	open, err := gorm.Open(mysql.Open(dsn))
-	if err != nil {
-		log.Errorf("数据库连接失败：%v", err)
+	cfg := config.GetConfig()
+	var err error
+
+	// 根据配置类型初始化数据库
+	if cfg.IsMySQL() {
+		// MySQL数据库
+		dsn := cfg.GetMySQLDSN()
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		if err != nil {
+			log.Errorf("MySQL数据库连接失败：%v", err)
+			panic(err)
+		}
+		log.Infof("MySQL数据库连接成功")
+	} else if cfg.IsSQLite() {
+		// SQLite数据库
+		dbPath := cfg.Database.SQLite.Path
+
+		// 确保数据库文件所在目录存在
+		dir := filepath.Dir(dbPath)
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			log.Errorf("创建SQLite数据库目录失败：%v", err)
+			panic(err)
+		}
+
+		db, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
+		if err != nil {
+			log.Errorf("SQLite数据库连接失败：%v", err)
+			panic(err)
+		}
+		log.Infof("SQLite数据库连接成功: %s", dbPath)
+	} else {
+		err := fmt.Errorf("不支持的数据库类型: %s", cfg.Database.Type)
+		log.Errorf("%v", err)
 		panic(err)
 	}
-	db = open
+
 	// 自动创建表
 	db.AutoMigrate(&models.NetEasySong{})
 
-	// 调用自定义迁移函数修改表结构
-	if err := MigrateNameField(db); err != nil {
-		log.Errorf("failed to migrate database: %v", err)
+	// 仅对MySQL执行字段迁移
+	if cfg.IsMySQL() {
+		if err := MigrateNameField(db); err != nil {
+			log.Errorf("failed to migrate database: %v", err)
+		}
 	}
 }
 
