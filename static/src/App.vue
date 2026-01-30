@@ -22,20 +22,16 @@
 
       <!-- Google AdSense -->
       <div class="ad-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-1997752442920544"
-             data-ad-slot="YOUR_AD_SLOT_ID"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1997752442920544"
+          data-ad-slot="YOUR_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
       </div>
 
       <el-row justify="center" @submit.prevent="fetchLinkDetails">
         <el-col :md="12">
           <el-form-item>
             <el-input v-model="state.link" size="large"
-                      :placeholder="state.isEnglish ? i18n.inputPlaceholder.en : i18n.inputPlaceholder.zh"
-                      @keyup.enter="fetchLinkDetails">
+              :placeholder="state.isEnglish ? i18n.inputPlaceholder.en : i18n.inputPlaceholder.zh"
+              @keyup.enter="fetchLinkDetails">
             </el-input>
           </el-form-item>
         </el-col>
@@ -47,13 +43,10 @@
             <el-checkbox v-model="state.useDetailedSongName">
               {{ state.isEnglish ? i18n.detailedSongName.en : i18n.detailedSongName.zh }}
             </el-checkbox>
-            <el-tooltip
-                :content="state.isEnglish ? i18n.detailedSongNameTip.en : i18n.detailedSongNameTip.zh"
-                placement="top"
-                effect="light"
-            >
+            <el-tooltip :content="state.isEnglish ? i18n.detailedSongNameTip.en : i18n.detailedSongNameTip.zh"
+              placement="top" effect="light">
               <el-icon class="info-icon">
-                <InfoFilled/>
+                <InfoFilled />
               </el-icon>
             </el-tooltip>
           </el-form-item>
@@ -66,11 +59,11 @@
             <span class="format-label">{{ state.isEnglish ? i18n.songFormat.en : i18n.songFormat.zh }}:</span>
             <el-radio-group v-model="state.songFormat" class="format-radio-group">
               <el-radio label="song-singer">{{
-                  state.isEnglish ? i18n.formatSongSinger.en : i18n.formatSongSinger.zh
+                state.isEnglish ? i18n.formatSongSinger.en : i18n.formatSongSinger.zh
                 }}
               </el-radio>
               <el-radio label="singer-song">{{
-                  state.isEnglish ? i18n.formatSingerSong.en : i18n.formatSingerSong.zh
+                state.isEnglish ? i18n.formatSingerSong.en : i18n.formatSingerSong.zh
                 }}
               </el-radio>
               <el-radio label="song">{{ state.isEnglish ? i18n.formatSongOnly.en : i18n.formatSongOnly.zh }}</el-radio>
@@ -85,11 +78,11 @@
             <span class="format-label">{{ state.isEnglish ? i18n.songOrder.en : i18n.songOrder.zh }}:</span>
             <el-radio-group v-model="state.songOrder" class="format-radio-group">
               <el-radio label="normal">{{
-                  state.isEnglish ? i18n.orderNormal.en : i18n.orderNormal.zh
+                state.isEnglish ? i18n.orderNormal.en : i18n.orderNormal.zh
                 }}
               </el-radio>
               <el-radio label="reverse">{{
-                  state.isEnglish ? i18n.orderReverse.en : i18n.orderReverse.zh
+                state.isEnglish ? i18n.orderReverse.en : i18n.orderReverse.zh
                 }}
               </el-radio>
             </el-radio-group>
@@ -107,7 +100,7 @@
         <el-col :md="12">
           <el-form-item>
             <el-input type="textarea" v-model="state.result" :rows="15"
-                      :placeholder="state.isEnglish ? i18n.resultHint.en : i18n.resultHint.zh"></el-input>
+              :placeholder="state.isEnglish ? i18n.resultHint.en : i18n.resultHint.zh"></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -136,7 +129,8 @@
                 <li>{{ state.isEnglish ? i18n.guideFirst.en : i18n.guideFirst.zh }}</li>
                 <li>{{ state.isEnglish ? i18n.guideSecond.en : i18n.guideSecond.zh }}</li>
                 <li>{{ state.isEnglish ? i18n.guideThird_1.en : i18n.guideThird_1.zh }}
-                  <b><a :href="state.isEnglish ? i18n.TunemyMusicUrl.en: i18n.TunemyMusicUrl.zh" target="_blank">TunemyMusic</a></b>
+                  <b><a :href="state.isEnglish ? i18n.TunemyMusicUrl.en : i18n.TunemyMusicUrl.zh"
+                      target="_blank">TunemyMusic</a></b>
                   or <b><a href="https://spotlistr.com" target="_blank">Spotlistr</a></b>
                   {{ state.isEnglish ? i18n.guideThird_2.en : i18n.guideThird_2.zh }}
                 </li>
@@ -146,20 +140,20 @@
                 {{
                   state.isEnglish ? i18n.tipBetweenNetEaseAndQQ.en : i18n.tipBetweenNetEaseAndQQ.zh
                 }}
-                {{ state.isEnglish ? i18n.see.en : i18n.see.zh }}<a
-                  href="https://github.com/Bistutu/GoMusic/issues/17" target="_blank">GitHub issue</a>
+                {{ state.isEnglish ? i18n.see.en : i18n.see.zh }}<a href="https://github.com/Bistutu/GoMusic/issues/17"
+                  target="_blank">GitHub issue</a>
               </blockquote>
             </el-collapse-item>
 
-            <el-collapse-item :title=" state.isEnglish ? i18n.sponsor.en : i18n.sponsor.zh " name="second">
+            <el-collapse-item :title="state.isEnglish ? i18n.sponsor.en : i18n.sponsor.zh" name="second">
               <div class="middle-font">
                 <p>{{ state.isEnglish ? i18n.sponsorHint.en : i18n.sponsorHint.zh }}</p>
                 <img src="@/assets/approve.png" style="width: 35%;max-width: 80%">
                 <el-table :data="sponsorData" border stripe style="width: 80%;max-width: 100%">
-                  <el-table-column prop="no" :label=" state.isEnglish ? i18n.no.en : i18n.no.zh "/>
-                  <el-table-column prop="name" :label=" state.isEnglish ? i18n.sponsorName.en : i18n.sponsorName.zh "/>
+                  <el-table-column prop="no" :label="state.isEnglish ? i18n.no.en : i18n.no.zh" />
+                  <el-table-column prop="name" :label="state.isEnglish ? i18n.sponsorName.en : i18n.sponsorName.zh" />
                   <el-table-column prop="sponsorship"
-                                   :label=" state.isEnglish ? i18n.sponsorship.en : i18n.sponsorship.zh "/>
+                    :label="state.isEnglish ? i18n.sponsorship.en : i18n.sponsorship.zh" />
                 </el-table>
               </div>
             </el-collapse-item>
@@ -173,12 +167,15 @@
 </template>
 
 <script setup>
-import {onMounted, reactive} from 'vue';
+import { onMounted, reactive } from 'vue';
 import axios from 'axios';
-import {ElMessage} from 'element-plus';
-import {isSupportedPlatform, isValidUrl} from "@/utils/utils";
-import {sendErrorMessage, sendSuccessMessage} from "@/utils/tip";
-import {InfoFilled} from '@element-plus/icons-vue';
+import { ElMessage } from 'element-plus';
+import { isSupportedPlatform, isValidUrl } from "@/utils/utils";
+import { sendErrorMessage, sendSuccessMessage } from "@/utils/tip";
+import { InfoFilled } from '@element-plus/icons-vue';
+
+// 从环境变量读取API基础URL
+const API_BASE_URL = import.meta.env.VUE_APP_API_BASE_URL || process.env.VUE_APP_API_BASE_URL || 'https://sss.unmeta.cn';
 
 const activeNames = reactive(['first', 'second']);
 const state = reactive({
@@ -341,16 +338,16 @@ const i18n = {
 
 // sponsor table data
 const sponsorData = [
-  {'no': '1', 'name': '冰楠 ₿.Ξ 🧘', 'sponsorship': '188'},
-  {'no': '2', 'name': '高胖胖', 'sponsorship': '101'},
-  {'no': '3', 'name': '不疯就行', 'sponsorship': '100'},
-  {'no': '4', 'name': '魏鹏程', 'sponsorship': '88'},
-  {'no': '5', 'name': '什么长发及腰不如短发凉', 'sponsorship': '87'},
-  {'no': '6', 'name': 'Youyo🍊', 'sponsorship': '66'},
-  {'no': '7', 'name': '安分wa', 'sponsorship': '50'},
-  {'no': '8', 'name': '高小伦', 'sponsorship': '50'},
-  {'no': '9', 'name': '平', 'sponsorship': '30'},
-  {'no': '10', 'name': '匿名用户', 'sponsorship': '30'}
+  { 'no': '1', 'name': '冰楠 ₿.Ξ 🧘', 'sponsorship': '188' },
+  { 'no': '2', 'name': '高胖胖', 'sponsorship': '101' },
+  { 'no': '3', 'name': '不疯就行', 'sponsorship': '100' },
+  { 'no': '4', 'name': '魏鹏程', 'sponsorship': '88' },
+  { 'no': '5', 'name': '什么长发及腰不如短发凉', 'sponsorship': '87' },
+  { 'no': '6', 'name': 'Youyo🍊', 'sponsorship': '66' },
+  { 'no': '7', 'name': '安分wa', 'sponsorship': '50' },
+  { 'no': '8', 'name': '高小伦', 'sponsorship': '50' },
+  { 'no': '9', 'name': '平', 'sponsorship': '30' },
+  { 'no': '10', 'name': '匿名用户', 'sponsorship': '30' }
 ]
 
 function reset(msg) {
@@ -378,10 +375,8 @@ const fetchLinkDetails = async () => {
     queryParams += `&format=${state.songFormat}`;
     queryParams += `&order=${state.songOrder}`;
 
-    // 本地开发环境URL
-    // const resp = await axios.post('http://127.0.0.1:8081/songlist' + queryParams, params, {
-    // 生产环境URL
-    const resp = await axios.post('https://sss.unmeta.cn/songlist' + queryParams, params, {
+    // 使用环境变量配置的API URL
+    const resp = await axios.post(`${API_BASE_URL}/songlist${queryParams}`, params, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -412,7 +407,7 @@ const fetchLinkDetails = async () => {
 // 复制结果
 const copyResult = () => {
   if (!state.result) {
-    ElMessage.error({message: state.isEnglish ? 'No content to copy' : '没有内容可复制', type: 'error'});
+    ElMessage.error({ message: state.isEnglish ? 'No content to copy' : '没有内容可复制', type: 'error' });
     return;
   }
   const textarea = document.createElement('textarea');
@@ -421,7 +416,7 @@ const copyResult = () => {
   textarea.select();
   document.execCommand('copy');
   document.body.removeChild(textarea);
-  ElMessage.success({message: state.isEnglish ? 'Copied to clipboard' : '已复制到剪贴板', type: 'success'});
+  ElMessage.success({ message: state.isEnglish ? 'Copied to clipboard' : '已复制到剪贴板', type: 'success' });
 };
 
 // 节流函数
@@ -484,8 +479,10 @@ window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
 }
 
 .github-badge-container {
-  text-align: center; /* 水平居中 */
-  margin-bottom: 1em; /* 添加一些上下边距 */
+  text-align: center;
+  /* 水平居中 */
+  margin-bottom: 1em;
+  /* 添加一些上下边距 */
 }
 
 .i18n_btn {
@@ -508,7 +505,8 @@ window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
 
 .button-center {
   margin: 0 auto;
-  display: block; /* 按钮水平居中 */
+  display: block;
+  /* 按钮水平居中 */
 }
 
 .middle-font {
@@ -546,5 +544,4 @@ window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
   max-width: 100%;
   overflow: hidden;
 }
-
 </style>
