@@ -34,6 +34,20 @@ func Post(link string, data io.Reader) (*http.Response, error) {
 	return client.Do(req)
 }
 
+// PostWithHeaders 发送带自定义请求头的POST请求
+func PostWithHeaders(link string, data io.Reader, headers map[string]string) (*http.Response, error) {
+	req, err := http.NewRequest(models.POST, link, data)
+	if err != nil {
+		log.Errorf("http NewRequest error: %+v", err)
+		return nil, err
+	}
+	req.Header.Add(models.ContentType, "application/x-www-form-urlencoded")
+	for key, value := range headers {
+		req.Header.Set(key, value)
+	}
+	return client.Do(req)
+}
+
 // GetRedirectLocation ...
 func GetRedirectLocation(link string) (string, error) {
 	rsp, err := clientNoRedirect.Get(link)
